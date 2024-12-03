@@ -8,12 +8,49 @@ namespace dfa
 {
     internal class Parser
     {
-        public string PolishForm;
+        public string PolishForm{ get; private set; }
         public string Expression;
 
         public Parser(string expression) {
-            PolishForm = CreatePolishPostfix(expression);
+            PolishForm = CreatePolishPostfix(AddConcatenations(expression));
             Expression = expression;
+        }
+
+        public string AddConcatenations(string expr)
+        {
+            string result = new string("");
+
+            for  (int i = 0; i < expr.Length - 1; i++)
+            {
+                result += expr[i];
+
+                if (CanInsertConcatenation(expr[i], expr[i + 1]))
+                {
+                    result += '.';
+                }
+            }
+
+            return result + expr.Last();
+        }
+
+        public bool CanInsertConcatenation(char lhs, char rhs)
+        {
+            if (isOperand(lhs) && isOperand(rhs))
+            {
+                return true;
+            }
+            
+            if (isOperand(lhs) && isLeftPharanthesis(rhs))
+            {
+                return true;
+            }
+
+            if (lhs == '*' && isOperand(rhs))
+            {
+                return true;
+            }
+
+            return false;
         }
 
         public string CreatePolishPostfix(string expression)
@@ -76,15 +113,7 @@ namespace dfa
 
         public bool isOperand(char ch)
         {
-            switch (ch)
-            {
-                case 'a':
-                    return true;
-                case 'b':
-                    return true;
-                default:
-                    return false;
-            }
+            return Char.IsLetter(ch);
         } 
 
         public bool isOperator(char ch)

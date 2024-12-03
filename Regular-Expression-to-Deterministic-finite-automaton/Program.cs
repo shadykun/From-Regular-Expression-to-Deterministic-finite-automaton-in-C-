@@ -7,9 +7,9 @@ namespace HelloWorld
     {
         public static void Main(string[] args)
         {
-            Operator op = new Operator("|");
+            Parser parser = new Parser("aba(aa|bb)*c(ab)*");
 
-            Console.WriteLine(op.Execute("miau", "hau"));
+            Console.WriteLine(parser.PolishForm);
         }
     }
 }
