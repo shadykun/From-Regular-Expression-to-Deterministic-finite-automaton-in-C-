@@ -1,12 +1,15 @@
-﻿using System;
+﻿using dfa;
+using System;
 
 namespace HelloWorld
 {
     class HelloWorld
     {
-        public static void main(string[] args)
+        public static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Operator op = new Operator("|");
+
+            Console.WriteLine(op.Execute("miau", "hau"));
         }
     }
 }
