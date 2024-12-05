@@ -6,9 +6,12 @@ using System.Threading.Tasks;
 
 namespace dfa
 {
-    internal class NondeterminsiticFiniteAutomaton
-    {
+    internal class DFA {
+        private HashSet<State> states;
 
+
+        public DFA() {
+            states = new HashSet<State>();
+        }
     }
 }
-

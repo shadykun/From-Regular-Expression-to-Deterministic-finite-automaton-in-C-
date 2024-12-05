@@ -1,9 +1,9 @@
 ﻿using dfa;
 using System;
 
-namespace HelloWorld
+namespace dfa
 {
-    class HelloWorld
+    class Program
     {
         public static void Main(string[] args)
         {

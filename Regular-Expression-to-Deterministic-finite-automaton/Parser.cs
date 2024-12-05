@@ -16,7 +16,7 @@ namespace dfa
             Expression = expression;
         }
 
-        public string AddConcatenations(string expr)
+        private string AddConcatenations(string expr)
         {
             string result = new string("");
 
@@ -33,7 +33,7 @@ namespace dfa
             return result + expr.Last();
         }
 
-        public bool CanInsertConcatenation(char lhs, char rhs)
+        private bool CanInsertConcatenation(char lhs, char rhs)
         {
             if (isOperand(lhs) && isOperand(rhs))
             {
@@ -53,7 +53,7 @@ namespace dfa
             return false;
         }
 
-        public string CreatePolishPostfix(string expression)
+        private string CreatePolishPostfix(string expression)
         {
             Stack<char> stack = new Stack<char>();
             string polish = new string("");
@@ -111,7 +111,7 @@ namespace dfa
             return polish;
         }
 
-        public bool isOperand(char ch)
+        private bool isOperand(char ch)
         {
             return Char.IsLetter(ch);
         } 
@@ -131,7 +131,7 @@ namespace dfa
             }
         }
 
-        public bool isLeftPharanthesis(char ch)
+        private bool isLeftPharanthesis(char ch)
         {
             if (ch == '(')
             {
@@ -141,7 +141,7 @@ namespace dfa
             return false;
         }
 
-        public bool isRightPharanthesis(char ch)
+        private bool isRightPharanthesis(char ch)
         {
             if (ch == ')')
             {
@@ -151,7 +151,7 @@ namespace dfa
             return false;
         }
 
-        static int getPriority(char ch)
+        private int getPriority(char ch)
         {
             switch (ch)
             {
