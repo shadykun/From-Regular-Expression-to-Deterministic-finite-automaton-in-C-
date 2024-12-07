@@ -6,12 +6,8 @@ using System.Threading.Tasks;
 
 namespace dfa
 {
-    internal class DFA {
-        private HashSet<State> states;
-
-
+    internal class DFA : Automaton {
         public DFA() {
-            states = new HashSet<State>();
         }
     }
 }
