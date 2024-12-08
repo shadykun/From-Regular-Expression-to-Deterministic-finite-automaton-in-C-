@@ -37,7 +37,16 @@ namespace dfa {
                 }
             }
 
-            return stack.Peek();
+            NFA nfa = stack.Pop();
+            nfa.Alphabet = setAlphabet(regular_expr);
+            
+            return nfa;
+        }
+
+        private HashSet<char> setAlphabet(string regular_expr) {
+            return new HashSet<char>(
+                regular_expr.Where(char.IsLetter)
+                );
         }
 
         private NFA ExecuteOperation(NFA lhs, char op, ref int counter) {

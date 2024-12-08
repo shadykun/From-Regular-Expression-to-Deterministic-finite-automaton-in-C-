@@ -25,7 +25,7 @@ namespace dfa
             //NFA miau = new NFA('c', 6);
             //Console.WriteLine(factory.nfa);
 
-            NFAFactory factory_nfa = new NFAFactory("(aa|b)*bb");//(aa|b)*bb
+            NFAFactory factory_nfa = new NFAFactory("aba(aa|bb)*c(ab)*");//(aa|b)*bb
 
             Console.WriteLine(factory_nfa.nfa);
             Console.WriteLine();
