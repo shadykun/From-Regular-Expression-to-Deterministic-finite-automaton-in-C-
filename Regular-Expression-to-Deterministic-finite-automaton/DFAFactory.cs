@@ -39,12 +39,12 @@ namespace dfa
         private DFA Build(){
 
             DFA rez = new DFA(nfa);
-            Stack<State> states = new Stack<State>();
+            Queue<State> states = new Queue<State>();
             Dictionary<State, HashSet<State>> newStates = new Dictionary<State, HashSet<State>>();
             Dictionary<HashSet<State>, State> newStatesRev = new Dictionary<HashSet<State>, State>();
 
             int counter = 0;
-            states.Push(new State($"q{counter}"));
+            states.Enqueue(new State($"q{counter}"));
             counter++;
             HashSet<State> work_states = new HashSet<State>(); 
             foreach(State s in bfs(nfa.StartState))
@@ -55,7 +55,7 @@ namespace dfa
 
             while (states.Count > 0)
             {
-                State start_state = states.Pop();
+                State start_state = states.Dequeue();
 
                 HashSet<State> check = new HashSet<State>(newStates[start_state]);
                 work_states = new HashSet<State>();
@@ -83,7 +83,7 @@ namespace dfa
                             if (checker){
                                 end_state = new State($"q{counter}");
                                 counter++;
-                                states.Push(end_state);
+                                states.Enqueue(end_state);
                                 newStates.Add(end_state, state_set);
                             }
                             else{
@@ -106,6 +106,12 @@ namespace dfa
                     }
                 }
             }
+            //foreach (State s in newStates.Keys)
+            //{
+            //    Console.WriteLine(s);
+            //    foreach (State q in newStates[s])
+            //        Console.WriteLine("    " + q);
+            //}
             return rez;
         }
 
