@@ -1,10 +1,12 @@
 ﻿using dfa;
 using System;
+using System.ComponentModel;
 
 namespace dfa
 {
     class Program
     {
+
         public static void Main(string[] args)
         {
             // Parser parser = new Parser("aba(aa|bb)*c(ab)*");
@@ -19,9 +21,9 @@ namespace dfa
 
             //NFA miau = new NFA('c', 6);
 
-            NFAFactory factory = new NFAFactory("aba(aa|bb)*c(ab)*");
+            //Parser parser = new Parser("(aa|b)*bb");
 
-            Console.WriteLine(factory.nfa);
+            //Console.WriteLine(parser.PolishForm);
         }
     }
 }
