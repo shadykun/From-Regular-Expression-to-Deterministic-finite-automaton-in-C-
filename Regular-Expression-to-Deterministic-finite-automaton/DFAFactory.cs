@@ -38,14 +38,10 @@ namespace dfa
 
         private DFA Build(){
 
-
-            Console.WriteLine(string.Join(" ", bfs(nfa.StartState).Select(t => t.Name)));
-
             DFA rez = new DFA(nfa);
             Stack<State> states = new Stack<State>();
             Dictionary<State, HashSet<State>> newStates = new Dictionary<State, HashSet<State>>();
             Dictionary<HashSet<State>, State> newStatesRev = new Dictionary<HashSet<State>, State>();
-            HashSet<State> nFinalStates = new HashSet<State>();
 
             int counter = 0;
             states.Push(new State($"q{counter}"));
@@ -56,12 +52,10 @@ namespace dfa
             rez.StartState = states.Peek();
             rez.States.Add(states.Peek());
             newStates.Add(rez.StartState, work_states);
-            newStatesRev.Add(work_states, rez.StartState);
 
             while (states.Count > 0)
             {
                 State start_state = states.Pop();
-                Console.WriteLine("Works?" + start_state);
 
                 HashSet<State> check = new HashSet<State>(newStates[start_state]);
                 work_states = new HashSet<State>();
@@ -79,7 +73,6 @@ namespace dfa
                             state_set = new HashSet<State>();
                         if (state_set.Count > 0)
                         {
-                            Console.WriteLine($"{state_set.Count} states");
                             State end_state = new State("");
                             bool checker = true;
                             foreach (HashSet<State> s in newStates.Values)
@@ -100,19 +93,19 @@ namespace dfa
                                         end_state = s;
                                 }
                             }
-                            newStatesRev.Add(state_set, end_state);
                             if (!rez.Transitions.TryAdd((start_state, c), end_state))
                                 return rez;
                             rez.States.Add(end_state);
-                            HashSet<State> possibleEnd = bfs(end_state);
+                            HashSet<State> possibleEnd = new HashSet<State>();
+                            foreach (State s in state_set)
+                                possibleEnd.UnionWith(bfs(s));
                             foreach (State s in possibleEnd)
                                 if (nfa.FinalStates.Contains(s))
-                                    nFinalStates.Add(end_state);
+                                    rez.FinalStates.Add(end_state);
                         }
                     }
                 }
             }
-            rez.FinalStates = nFinalStates;
             return rez;
         }
 
