@@ -17,11 +17,18 @@ namespace dfa
 
             //NFA alternated = NFA.Alternate(lhs, rhs, 4);
 
+    
             //NFA miau = new NFA('c', 6);
 
-            NFAFactory factory = new NFAFactory("aba(aa|bb)*c(ab)*");
+            NFAFactory factory = new NFAFactory("(aa|b)*bb");//(aa|b)*bb
 
             Console.WriteLine(factory.nfa);
+
+            DFAFactory dfa = new DFAFactory(factory.nfa);
+
+            Console.WriteLine(dfa.dfa);
+            //DFAFactory factory1 = new DFAFactory(factory.nfa);
+            //Console.WriteLine(factory1.dfa);
         }
     }
 }
