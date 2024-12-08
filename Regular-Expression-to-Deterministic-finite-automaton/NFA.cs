@@ -92,19 +92,16 @@ namespace dfa
                 var res_from_state = key.Item1;
                 var res_to_states = to_states;
 
-                if (to_states.First() == lhs.FinalStates.First()) {
-                    res_to_states = new HashSet<State>{concat_state};
-                }
-                else if (from_state == rhs.StartState) {
-                    res_from_state = concat_state;
+                if (res_from_state == rhs.StartState) {
+                    res_from_state = new State(concat_state.Name);
                 }
 
-                if (res_transitions.ContainsKey((res_from_state, symbol))) {
-                    res_transitions[(res_from_state, symbol)].Concat(res_to_states);
+                if (res_to_states.Contains(lhs.FinalStates.First())) {
+                    res_to_states.Remove(lhs.FinalStates.First());
+                    res_to_states.Add(new State(concat_state.Name));
                 }
-                else {
-                    res_transitions.Add((res_from_state, symbol), res_to_states);
-                }
+
+                res_transitions.Add((res_from_state, symbol), new HashSet<State>(res_to_states));
             }
 
             return new NFA(

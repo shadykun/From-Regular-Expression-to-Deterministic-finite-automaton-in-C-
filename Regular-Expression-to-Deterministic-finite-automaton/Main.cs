@@ -20,15 +20,19 @@ namespace dfa
             //NFA alternated = NFA.Alternate(lhs, rhs, 4);
 
     
+
+
             //NFA miau = new NFA('c', 6);
+            //Console.WriteLine(factory.nfa);
 
-            NFAFactory factory = new NFAFactory("(aa|b)*bb");//(aa|b)*bb
+            NFAFactory factory_nfa = new NFAFactory("(aa|b)*bb");//(aa|b)*bb
 
-            Console.WriteLine(factory.nfa);
+            Console.WriteLine(factory_nfa.nfa);
+            Console.WriteLine();
 
-            DFAFactory dfa = new DFAFactory(factory.nfa);
+            DFAFactory factory_dfa = new DFAFactory(factory_nfa.nfa);
 
-            Console.WriteLine(dfa.dfa);
+            Console.WriteLine(factory_dfa.dfa);
             //DFAFactory factory1 = new DFAFactory(factory.nfa);
             //Console.WriteLine(factory1.dfa);
         }

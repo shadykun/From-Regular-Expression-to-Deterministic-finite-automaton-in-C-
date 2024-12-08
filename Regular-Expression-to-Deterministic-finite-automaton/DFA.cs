@@ -25,7 +25,7 @@ namespace dfa
         public override string ToString()
         {
             var transitionsString = string.Join("\n", Transitions.Select(t =>
-            $"({t.Key.Item1}, {t.Key.Item2?.ToString()}) -> {{ {string.Join(", ", t.Value)}}}"));
+            $"({t.Key.Item1}, {t.Key.Item2?.ToString()}) -> {{ {string.Join(", ", t.Value)} }}"));
 
             return base.ToString() +
                 "Delta: {\n" +
