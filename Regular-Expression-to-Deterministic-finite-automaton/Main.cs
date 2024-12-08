@@ -19,11 +19,18 @@ namespace dfa
 
             //NFA alternated = NFA.Alternate(lhs, rhs, 4);
 
+    
             //NFA miau = new NFA('c', 6);
 
-            //Parser parser = new Parser("(aa|b)*bb");
+            NFAFactory factory = new NFAFactory("(aa|b)*bb");//(aa|b)*bb
 
-            //Console.WriteLine(parser.PolishForm);
+            Console.WriteLine(factory.nfa);
+
+            DFAFactory dfa = new DFAFactory(factory.nfa);
+
+            Console.WriteLine(dfa.dfa);
+            //DFAFactory factory1 = new DFAFactory(factory.nfa);
+            //Console.WriteLine(factory1.dfa);
         }
     }
 }

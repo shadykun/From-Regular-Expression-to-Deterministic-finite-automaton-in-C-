@@ -11,7 +11,7 @@ namespace dfa {
         public NFAFactory(string regular_expr) {
             nfa = Build(regular_expr);
         }
-        public NFA Build(string regular_expr) {
+        private NFA Build(string regular_expr) {
             Parser parser = new Parser(regular_expr);
 
             Stack<NFA> stack = new Stack<NFA>();
