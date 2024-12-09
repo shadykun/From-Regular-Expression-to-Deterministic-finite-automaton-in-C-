@@ -15,7 +15,9 @@ namespace dfa {
             Console.WriteLine(dfa);
         }
 
-        public bool regexMatch(string regular_expr) {
+        
+
+        public bool CheckWord(string regular_expr) {
             State curr_state = dfa.StartState;
 
             foreach (char ch in regular_expr) {

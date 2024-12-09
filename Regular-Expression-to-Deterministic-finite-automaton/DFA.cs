@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace dfa
 {
@@ -43,6 +44,26 @@ namespace dfa
             }
 
             return res;
+        }
+
+        public void PrintAutomaton()
+        {
+            bool check;
+            string filePath = @"Automaton.txt";
+            Console.WriteLine("Where do you want the automaton to be shown?\n1. Console\n2. File named Automaton.txt\n\nChoice: ");
+            check = Convert.ToBoolean(Convert.ToInt16(Console.ReadLine())-1);
+            if (check)
+            {
+                if (!File.Exists(filePath))
+                {
+                    FileStream f = File.Create(filePath);
+                }
+                StreamWriter sw = new StreamWriter(filePath);
+                sw.WriteLine(this);
+                sw.Close();
+            }
+            else
+                Console.WriteLine(this);
         }
 
         public override string ToString()

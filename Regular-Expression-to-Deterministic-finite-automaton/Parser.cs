@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace dfa {
     internal class Parser {
@@ -158,6 +160,41 @@ namespace dfa {
                     return 3;
                 default:
                     return 0;
+            }
+        }
+
+        public static bool RegexCheck(string expressionFile)
+        {
+            try
+            {
+                StreamReader f = new StreamReader(expressionFile);
+                string? expression;
+                expression = f.ReadLine();
+
+                if(expression == null) 
+                    return false;
+                
+                if (string.IsNullOrWhiteSpace(expression))
+                    return false;
+
+                expression.Replace(".", "");
+
+                Regex regex = new Regex(expression);
+                try
+                {
+                    new Regex(expression);
+                    return true;
+                }
+                catch (ArgumentException)
+                {
+                    return false;
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
             }
         }
     }
