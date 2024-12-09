@@ -67,7 +67,7 @@ namespace dfa {
             for (int i = 0; i < expr.Length - 1; i++) {
                 result += expr[i];
 
-                if (CanInsertConcatenation(expr[i], expr[i + 1])) {
+                if (InsertConcatenation(expr[i], expr[i + 1])) {
                     result += '.';
                 }
             }
@@ -75,7 +75,7 @@ namespace dfa {
             return result + expr.Last();
         }
 
-        private bool CanInsertConcatenation(char lhs, char rhs) {
+        private bool InsertConcatenation(char lhs, char rhs) {
             if (isOperand(lhs) && isOperand(rhs)) {
                 return true;
             }
@@ -85,6 +85,18 @@ namespace dfa {
             }
 
             if (lhs == '*' && isOperand(rhs)) {
+                return true;
+            }
+
+            if (isRightPharanthesis(lhs) && isRightPharanthesis(rhs)) {
+                return true;
+            }
+
+            if (isRightPharanthesis(lhs) && isOperand(rhs)) {
+                return true;
+            }
+
+            if (lhs == '*' && isLeftPharanthesis(rhs)) {
                 return true;
             }
 

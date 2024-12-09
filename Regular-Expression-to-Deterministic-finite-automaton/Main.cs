@@ -9,7 +9,7 @@ namespace dfa
 
         public static void Main(string[] args)
         {
-            // Parser parser = new Parser("aba(aa|bb)*c(ab)*");
+
 
             // Console.WriteLine(parser.PolishForm);
 
@@ -19,22 +19,28 @@ namespace dfa
 
             //NFA alternated = NFA.Alternate(lhs, rhs, 4);
 
-    
+
 
 
             //NFA miau = new NFA('c', 6);
             //Console.WriteLine(factory.nfa);
 
-            NFAFactory factory_nfa = new NFAFactory("aba(aa|bb)*c(ab)*");//(aa|b)*bb
+            string expr = "(a|b)c*d*";
 
-            Console.WriteLine(factory_nfa.nfa);
-            Console.WriteLine();
+            Regex regex = new Regex(expr);
 
-            DFAFactory factory_dfa = new DFAFactory(factory_nfa.nfa);
+            while (true) {
+                string line = Console.ReadLine();
+                Console.WriteLine(regex.regexMatch(line));
+            }
 
-            Console.WriteLine(factory_dfa.dfa);
-            //DFAFactory factory1 = new DFAFactory(factory.nfa);
-            //Console.WriteLine(factory1.dfa);
+            //Parser parser = new Parser(expr);
+
+            //Console.WriteLine(parser.PolishForm);
+
+            //DFAFactory factory_dfa = new DFAFactory(expr);
+
+            //Console.WriteLine(factory_dfa.dfa);
         }
     }
 }
