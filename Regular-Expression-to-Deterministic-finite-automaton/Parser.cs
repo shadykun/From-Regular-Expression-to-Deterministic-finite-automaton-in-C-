@@ -163,39 +163,60 @@ namespace dfa {
             }
         }
 
-        public static bool RegexCheck(string expressionFile)
+        public static string? RegexCheckFromFile(string? expressionFile)
         {
             try
             {
+                if (expressionFile == null)
+                    return null;
                 StreamReader f = new StreamReader(expressionFile);
                 string? expression;
                 expression = f.ReadLine();
-
-                if(expression == null) 
-                    return false;
-                
-                if (string.IsNullOrWhiteSpace(expression))
-                    return false;
-
-                expression.Replace(".", "");
-
-                Regex regex = new Regex(expression);
-                try
-                {
-                    new Regex(expression);
-                    return true;
-                }
-                catch (ArgumentException)
-                {
-                    return false;
-                }
-                
+                if (RegexCheck(expression))
+                    return expression;
+                return null;
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+                return null;
+            }
+        }
+
+        public static bool RegexCheck(string? expression)
+        {
+            if (expression == null)
+                return false;
+
+            if (string.IsNullOrWhiteSpace(expression))
+                return false;
+
+            expression.Replace(".", "");
+
+            Regex regex = new Regex(expression);
+            try
+            {
+                new Regex(expression);
+                return true;
+            }
+            catch (ArgumentException)
+            {
                 return false;
             }
+        }
+
+        public static bool VerifyAutomaton(DFA dfa)
+        {
+            if (dfa == null)
+                return false;
+            if(dfa.States.Count == 0) 
+                return false;
+            if (dfa.States.Contains(dfa.StartState))
+                return false;
+            if(dfa.States.Except(dfa.FinalStates).Count() == dfa.States.Count())
+                return false;
+
+            return true;
         }
     }
 }
